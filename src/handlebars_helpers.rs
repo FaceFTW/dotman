@@ -359,9 +359,11 @@ mod test {
 
     #[test]
     fn eval_condition_simple() {
+        let mut variables = toml::Table::new();
+        variables.insert("foo".into(), 2.into());
         let mut config = Configuration {
             files: Files::new(),
-            variables: maplit::btreemap! { "foo".into() => 2.into() },
+            variables,
             #[cfg(feature = "scripting")]
             helpers: Helpers::new(),
             packages: maplit::btreemap! { "default".into() => true, "disabled".into() => false },

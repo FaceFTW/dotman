@@ -508,7 +508,7 @@ dependencies = [
  "shellexpand",
  "simplelog",
  "tokio",
- "toml 0.4.10",
+ "toml",
  "watchexec",
  "watchexec-events",
  "watchexec-filterer-globset",
@@ -1031,7 +1031,7 @@ dependencies = [
  "serde_json",
  "serde_yaml",
  "thiserror 1.0.69",
- "toml 0.8.20",
+ "toml",
 ]
 
 [[package]]
@@ -2167,15 +2167,6 @@ dependencies = [
  "futures-core",
  "pin-project-lite",
  "tokio",
-]
-
-[[package]]
-name = "toml"
-version = "0.4.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "758664fc71a3a69038656bee8b6be6477d2a6c315a6b81f7081f591bffa4111f"
-dependencies = [
- "serde",
 ]
 
 [[package]]

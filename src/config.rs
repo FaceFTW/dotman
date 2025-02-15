@@ -256,25 +256,25 @@ pub fn save_dummy_config(
 }
 
 fn recursive_extend_map(
-    original: &mut BTreeMap<String, toml::Value>,
-    new: BTreeMap<String, toml::Value>,
+    original: &mut toml::map::Map<String, toml::Value>,
+    new: toml::map::Map<String, toml::Value>,
 ) {
     for (key, new_value) in new {
-        original
-            .entry(key)
-            .and_modify(|original_value| {
-                match (
-                    original_value.as_table().cloned(),
-                    new_value.as_table().cloned(),
-                ) {
-                    (Some(mut original_table), Some(new_table)) => {
-                        recursive_extend_map(&mut original_table, new_table);
-                        *original_value = original_table.into();
-                    }
-                    _ => *original_value = new_value.clone(),
+        match original.get_mut(&key) {
+            Some(original_value) => match (
+                original_value.as_table().cloned(),
+                new_value.as_table().cloned(),
+            ) {
+                (Some(mut original_table), Some(new_table)) => {
+                    recursive_extend_map(&mut original_table, new_table);
+                    *original_value = original_table.into();
                 }
-            })
-            .or_insert(new_value);
+                _ => *original_value = new_value.clone(),
+            },
+            None => {
+                original.insert(key, new_value); //Discard the returned option
+            }
+        }
     }
 }
 
