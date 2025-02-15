@@ -9,7 +9,7 @@ readme = "README.md"
 keywords = ["dotter", "dotfiles", "manager"]
 categories = ["command-line-utilities"]
 license = "Unlicense"
-rust-version = "1.70"
+rust-version = "1.84"
 
 [dependencies]
 anyhow = "1.*"
@@ -21,20 +21,20 @@ handlebars = "6.*"
 hostname = "0.4.*"
 log = "0.4.*"
 maplit = "1.*"
-evalexpr = "11"
+evalexpr = "11"                                                 # Cannot be upgraded due to AGPL license
 serde = { version = "1.*", features = ["derive"] }
-shellexpand = "2.*"
+shellexpand = { version = "3.*", features = ["base-0"] }
 simplelog = "0.12.*"
 tokio = "1.*"
 toml = "0.4.*"
-watchexec = { version = "3", optional = true }
-watchexec-events = { version = "2.0.1", optional = true }
-watchexec-filterer-tagged = { version = "1.0.0", optional = true }
+watchexec = { version = "6", optional = true }
+watchexec-events = { version = "5", optional = true }
+watchexec-filterer-globset = { version = "7", optional = true }
 
 [features]
 default = ["scripting", "watch"]
 scripting = ["handlebars/script_helper"]
-watch = ["watchexec", "watchexec-events", "watchexec-filterer-tagged"]
+watch = ["watchexec", "watchexec-events", "watchexec-filterer-globset"]
 
 [dependencies.handlebars_misc_helpers]
 version = "0.17.*"
@@ -42,7 +42,7 @@ default-features = false
 features = ["string", "json"]
 
 [dev-dependencies]
-mockall = "0.11.3"
+mockall = "0.13.1"
 # Enable this instead for better failure messages (on nightly only)
 # mockall = { version = "0.9.*", features = ["nightly"] }
 
