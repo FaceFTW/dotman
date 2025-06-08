@@ -4,15 +4,27 @@
 
 ___This divergence is a work in progress, with breaking changes detailed as they are made.___
 
+# Differences from Dotter
+
+- Removal of the "watch" feature (Increased size/startup time due `watchexec`'s reliance on Tokio. Also had [bugs](https://github.com/SuperCuber/dotter/issues/196))
+-
+
 
 # Installation
 
-TODO
+No official packages are yet available, but building from source is possible through Cargo:
+
+```sh
+cargo build --release
+```
+
+The compiled binary (`dotman`) will be in the `target/release` folder.
 
 # Wiki
 TODO
 
-Most of the templating and other
+Most of the templating and configuration remains the same as `dotter`, use that Wiki for now until I migrate it over:
+https://github.com/SuperCuber/dotter/wiki
 
 # Usage
 

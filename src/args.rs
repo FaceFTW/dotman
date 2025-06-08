@@ -101,11 +101,6 @@ pub enum Action {
     /// directory pointing to a dummy value and a local.toml that selects that package.
     Init,
 
-    /// Run continuously, watching the repository for changes and deploying as soon as they
-    /// happen. Can be ran with `--dry-run`
-    #[cfg(feature = "watch")]
-    Watch,
-
     /// Generate shell completions
     GenCompletions {
         /// Set the shell for generating completions [values: bash, elvish, fish, powerShell, zsh]

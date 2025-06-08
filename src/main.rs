@@ -10,8 +10,6 @@ mod filesystem;
 mod handlebars_helpers;
 mod hooks;
 mod init;
-#[cfg(feature = "watch")]
-mod watch;
 
 use std::fmt::Write;
 use std::io;
@@ -108,14 +106,6 @@ Otherwise, run `dotter undeploy` as root, remove cache.toml and cache/ folders, 
         args::Action::Init => {
             debug!("Initializing repo...");
             init::init(opt).context("initalize directory")?;
-        }
-        #[cfg(feature = "watch")]
-        args::Action::Watch => {
-            debug!("Watching...");
-            tokio::runtime::Runtime::new()
-                .expect("create a tokio runtime")
-                .block_on(watch::watch(opt))
-                .context("watch repository")?;
         }
         args::Action::GenCompletions { shell, to } => {
             if let Some(to) = to {
