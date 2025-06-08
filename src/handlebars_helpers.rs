@@ -70,32 +70,6 @@ fn eval_condition(
     Ok(rendered == "true")
 }
 
-fn math_helper(
-    h: &Helper<'_>,
-    _: &Handlebars<'_>,
-    _: &Context,
-    _: &mut RenderContext<'_, '_>,
-    out: &mut dyn Output,
-) -> HelperResult {
-    let params = h
-        .params()
-        .iter()
-        .map(|p| p.render())
-        .collect::<Vec<String>>();
-    let expression = params.join(" ");
-
-    out.write(
-        &evalexpr::eval(&expression)
-            .map_err(|e| {
-                RenderErrorReason::Other(format!(
-                    "Cannot evaluate expression {expression} because {e}"
-                ))
-            })?
-            .to_string(),
-    )?;
-    Ok(())
-}
-
 fn include_template_helper(
     h: &Helper<'_>,
     handlebars: &Handlebars<'_>,
@@ -275,8 +249,6 @@ fn os_shell() -> Command {
 
 fn register_rust_helpers(handlebars: &mut Handlebars<'_>) {
     handlebars_misc_helpers::register(handlebars);
-    handlebars.register_helper("math", Box::new(math_helper));
-
     handlebars.register_helper("include_template", Box::new(include_template_helper));
     handlebars.register_helper("is_executable", Box::new(is_executable_helper));
     handlebars.register_helper("command_success", Box::new(command_success_helper));
@@ -378,12 +350,14 @@ mod test {
         assert!(
             !eval_condition(&handlebars, &config.variables, "dotter.packages.nonexist").unwrap()
         );
-        assert!(!eval_condition(
-            &handlebars,
-            &config.variables,
-            "(and true dotter.packages.disabled)"
-        )
-        .unwrap());
+        assert!(
+            !eval_condition(
+                &handlebars,
+                &config.variables,
+                "(and true dotter.packages.disabled)"
+            )
+            .unwrap()
+        );
     }
 
     #[test]
@@ -399,14 +373,13 @@ mod test {
         };
         let handlebars = create_new_handlebars(&mut config).unwrap();
 
-        assert!(!eval_condition(
-            &handlebars,
-            &config.variables,
-            "(is_executable \"no_such_executable_please\")"
-        )
-        .unwrap());
         assert!(
-            eval_condition(&handlebars, &config.variables, "(eq (math \"5+5\") \"10\")").unwrap()
+            !eval_condition(
+                &handlebars,
+                &config.variables,
+                "(is_executable \"no_such_executable_please\")"
+            )
+            .unwrap()
         );
     }
 }

@@ -6,7 +6,10 @@ ___This divergence is a work in progress, with breaking changes detailed as they
 
 # Differences from Dotter
 
-- Removal of the "watch" feature (Increased size/startup time due `watchexec`'s reliance on Tokio. Also had [bugs](https://github.com/SuperCuber/dotter/issues/196))
+- Removal of the "watch" feature
+  - This increased size/startup time due `watchexec`'s reliance on Tokio. Also had [bugs](https://github.com/SuperCuber/dotter/issues/196)
+- Math Expressions are no longer supported in Handlebars substitutions
+  - Doesn't really make sense, also newer versions of `evalexpr` are AGPL and would require license changing
 -
 
 

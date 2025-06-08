@@ -21,7 +21,6 @@ handlebars = "6.*"
 hostname = "0.4.*"
 log = "0.4.*"
 maplit = "1.*"
-evalexpr = "11"                                          # Cannot be upgraded due to AGPL license
 serde = { version = "1.*", features = ["derive"] }
 shellexpand = { version = "3.*", features = ["base-0"] }
 simplelog = "0.12.*"
