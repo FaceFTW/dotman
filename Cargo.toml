@@ -1,15 +1,15 @@
 [package]
-name = "dotter"
+name = "dotman"
 version = "0.13.3"
-authors = ["SuperCuber <amit.gold01@gmail.com>"]
-description = "A dotfile manager and templater written in rust"
-edition = "2021"
-repository = "https://github.com/SuperCuber/dotter"
+authors = ["FaceFTW <alex@faceftw.dev>"]
+description = "A dotfile manager and templater written in rust, forked from SuperCuber/dotter"
+edition = "2024"
+repository = "https://github.com/FaceFTW/dotman"
 readme = "README.md"
-keywords = ["dotter", "dotfiles", "manager"]
+keywords = ["dotter", "dotfiles", "manager", "cli"]
 categories = ["command-line-utilities"]
-license = "Unlicense"
-rust-version = "1.84"
+license = "Apache 2.0 License"
+rust-version = "1.85"
 
 [dependencies]
 anyhow = "1.*"
@@ -21,7 +21,7 @@ handlebars = "6.*"
 hostname = "0.4.*"
 log = "0.4.*"
 maplit = "1.*"
-evalexpr = "11"                                                 # Cannot be upgraded due to AGPL license
+evalexpr = "11"                                                     # Cannot be upgraded due to AGPL license
 serde = { version = "1.*", features = ["derive"] }
 shellexpand = { version = "3.*", features = ["base-0"] }
 simplelog = "0.12.*"
