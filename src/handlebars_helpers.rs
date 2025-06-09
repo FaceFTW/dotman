@@ -9,7 +9,6 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
 
-#[cfg(feature = "scripting")]
 use crate::config::Helpers;
 use crate::config::{Configuration, Files, Variables};
 
@@ -20,7 +19,6 @@ pub fn create_new_handlebars<'b>(config: &mut Configuration) -> Result<Handlebar
     handlebars.set_strict_mode(true); // Report missing variables as errors
     register_rust_helpers(&mut handlebars);
 
-    #[cfg(feature = "scripting")]
     register_script_helpers(&mut handlebars, &config.helpers);
 
     add_dotter_variable(&mut config.variables, &config.files, &config.packages);
@@ -255,7 +253,6 @@ fn register_rust_helpers(handlebars: &mut Handlebars<'_>) {
     handlebars.register_helper("command_output", Box::new(command_output_helper));
 }
 
-#[cfg(feature = "scripting")]
 fn register_script_helpers(handlebars: &mut Handlebars<'_>, helpers: &Helpers) {
     debug!("Registering script helpers...");
     for (helper_name, helper_path) in helpers {
@@ -336,7 +333,6 @@ mod test {
         let mut config = Configuration {
             files: Files::new(),
             variables,
-            #[cfg(feature = "scripting")]
             helpers: Helpers::new(),
             packages: maplit::btreemap! { "default".into() => true, "disabled".into() => false },
             recurse: true,
@@ -365,7 +361,6 @@ mod test {
         let mut config = Configuration {
             files: Files::new(),
             variables: Variables::new(),
-            #[cfg(feature = "scripting")]
             helpers: Helpers::new(),
             packages: BTreeMap::new(),
             recurse: true,

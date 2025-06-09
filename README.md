@@ -10,7 +10,9 @@ ___This divergence is a work in progress, with breaking changes detailed as they
   - This increased size/startup time due `watchexec`'s reliance on Tokio. Also had [bugs](https://github.com/SuperCuber/dotter/issues/196)
 - Math Expressions are no longer supported in Handlebars substitutions
   - Doesn't really make sense, also newer versions of `evalexpr` are AGPL and would require license changing
--
+- Handlebars Scripting no longer has a feature flag, is always integrated
+  - This feels like a "core" feature that shouldn't really be disabled, and adding a flag makes maintenance a bit annoying
+
 
 
 # Installation
