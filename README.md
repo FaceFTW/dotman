@@ -1,18 +1,31 @@
-# Dotman
+# DotMan
 
-`dotman` is a diverging fork of [`SuperCuber/dotter`](https://github.com/SuperCuber/dotter), which now seems to be unmaintained. This fork has some key differences from `dotter` to make it much "lighter" but still retain compatibility with the original tool.
+`dotman` is an opinionated, diverging fork of [`SuperCuber/dotter`](https://github.com/SuperCuber/dotter), which now seems to be unmaintained. This fork has some key differences from `dotter` to make it much "lighter" and work the way _I_ want it to, but still retain compatibility with the original tool.
 
 ___This divergence is a work in progress, with breaking changes detailed as they are made.___
 
 # Differences from Dotter
 
-- Removal of the "watch" feature
-  - This increased size/startup time due `watchexec`'s reliance on Tokio. Also had [bugs](https://github.com/SuperCuber/dotter/issues/196)
-- Math Expressions are no longer supported in Handlebars substitutions
-  - Doesn't really make sense, also newer versions of `evalexpr` are AGPL and would require license changing
-- Handlebars Scripting no longer has a feature flag, is always integrated
-  - This feels like a "core" feature that shouldn't really be disabled, and adding a flag makes maintenance a bit annoying
+For each change, I provide a bit of my reasoning, so before you open an issue, read here!
 
+- Removal of the "watch" feature
+> This increased size/startup time due `watchexec`'s reliance on Tokio. Also had [bugs](https://github.com/SuperCuber/dotter/issues/196)
+- Math Expressions are no longer supported in Handlebars substitutions
+> Doesn't really make sense, also newer versions of `evalexpr` are AGPL and would require license changing
+- Handlebars Scripting no longer has a feature flag, is always integrated
+> This feels like a "core" feature that shouldn't really be disabled, and adding a flag makes maintenance a bit annoying
+- Logging changes
+  - More terminal output is displayed by default (INFO level)
+  - Some log calls have changed levels depending on utility
+  - Single verbosity level prints TRACE + DEBUG logs
+  - TRACE logs are removed overall.
+  - Using [`env-logger`](https://github.com/rust-cli/env_logger) as a personal preference
+> The above changes are more of a personal preference. I'd like to see what DotMan is doing when I do deploy/rollback. `--quiet` is still available as an option for those who want it.
+>
+> The general methodology I plan to put when it comes to reorganizing INFO and lower messages are as follows:
+> - INFO - information about the general actions DotMan is taking
+> - DEBUG - extra information like detected state that is more useful in certain situations
+> - TRACE - something to insert when working in the code and modifying something
 
 
 # Installation
@@ -33,16 +46,16 @@ https://github.com/SuperCuber/dotter/wiki
 
 # Usage
 
-Check out `dotman -h` for the command-line flags that Dotman supports:
+Check out `dotman -h` for the command-line flags that DotMan supports:
 
 ```
 
 ```
 
 # Contributing
-Contributions to Dotman are welcome, whether in the form of a pull request or an issue (for bug repots, feature requests, or other helpful comments)
+Contributions to DotMan are welcome, whether in the form of a pull request or an issue (for bug repots, feature requests, or other helpful comments)
 
 # Legal Stuff
 
 `dotman` is licensed under the MIT License.
-The original source code of dotter was licensed under the Unlicense.
+The original source code of `SuperCuber/dotter` was licensed under the Unlicense.

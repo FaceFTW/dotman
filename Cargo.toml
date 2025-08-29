@@ -17,18 +17,21 @@ clap = { version = "4.5.*", features = ["derive"] }
 clap_complete = "4.5.*"
 crossterm = "0.29"
 diff = "0.1.*"
-handlebars = {version = "6.*", features = ["script_helper"]}
+handlebars = { version = "6.*", features = ["script_helper"] }
 handlebars_misc_helpers = { version = "0.17", default-features = false, features = [
 	"string",
 	"json",
 ] }
 hostname = "0.4.*"
-log = "0.4.*"
 maplit = "1.*"
 serde = { version = "1.*", features = ["derive"] }
 shellexpand = { version = "3.*", features = ["base-0"] }
 simplelog = "0.12.*"
 toml = "0.8.*"
+
+# logging
+log = "0.4.*"
+env_logger = "0.11.*"
 
 [features]
 

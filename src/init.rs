@@ -6,7 +6,7 @@ use crate::args::Options;
 use crate::config;
 use crate::filesystem::save_file;
 
-pub fn init(opt: Options) -> Result<()> {
+pub fn init(opt: Options) -> Result<bool> {
     info!("Looking for existing configuration...");
     if opt.global_config.exists() {
         if opt.force {
@@ -53,5 +53,5 @@ pub fn init(opt: Options) -> Result<()> {
     }
     .context("remove cache directory")?;
 
-    Ok(())
+    Ok(true)
 }
