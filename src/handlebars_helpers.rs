@@ -24,7 +24,7 @@ pub fn create_new_handlebars<'b>(config: &mut Configuration) -> Result<Handlebar
     add_dotter_variable(&mut config.variables, &config.files, &config.packages);
     filter_files_condition(&handlebars, &config.variables, &mut config.files)
         .context("filter files based on `if` field")?;
-    trace!("Handlebars instance: {:#?}", handlebars);
+    debug!("Handlebars instance: {:#?}", handlebars);
     Ok(handlebars)
 }
 

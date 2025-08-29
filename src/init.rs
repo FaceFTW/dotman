@@ -32,7 +32,7 @@ pub fn init(opt: Options) -> Result<bool> {
         }
         files.push(name);
     }
-    trace!("Files: {:#?}", files);
+    debug!("Files: {:#?}", files);
 
     config::save_dummy_config(files, &opt.local_config, &opt.global_config)
         .context("save dummy config")?;

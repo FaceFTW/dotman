@@ -61,12 +61,12 @@ fn main() {
         })
         .filter_level(match opt.verbosity {
             _ if opt.quiet => log::LevelFilter::Error,
-            true => log::LevelFilter::Info,
-            false => log::LevelFilter::Trace,
+            true => log::LevelFilter::Trace,
+            false => log::LevelFilter::Info,
         })
         .init();
 
-    trace!("Loaded options: {:#?}", opt);
+    debug!("Loaded options: {:#?}", opt);
 
     #[cfg(unix)]
     {
