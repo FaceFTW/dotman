@@ -44,8 +44,11 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: "~/.cargo"
-          key: cargo-main
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Build
         shell: bash
@@ -74,8 +77,11 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: "~/.cargo"
-          key: cargo-main
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Generate Completions
         run: |

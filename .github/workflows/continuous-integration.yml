@@ -39,8 +39,11 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: "~/.cargo"
-          key: cargo-main
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Check Build
         run: cargo check --verbose --locked --target ${{ matrix.target }}
@@ -59,8 +62,11 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: "~/.cargo"
-          key: cargo-main
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Publish Dry-run
         run: cargo publish --dry-run --verbose --locked
@@ -78,8 +84,11 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: "~/.cargo"
-          key: cargo-main
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Unit Tests
         run: cargo test
@@ -100,8 +109,11 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: "~/.cargo"
-          key: cargo-main
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Check Formatting
         run: cargo fmt --all -- --check
@@ -119,8 +131,11 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: "~/.cargo"
-          key: cargo-main
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Add Clippy
         run: rustup component add clippy

@@ -9,7 +9,7 @@ assignees: ''
 
 ## Environment
 - **OS**: Linux distribution / Windows version
-- **Dotter version**: Find out using `dotter -V`
+- **DotMan version**: Find out using `dotman -V`
 - **Additional relevant information**
 
 ## Description
@@ -23,7 +23,7 @@ A clear and concise description of what you expected to happen.
 
 ### Actual behavior
 What actually happened.
-Include an error message if applicable, preferably using the `--verbose` otion when running the program, i.e.:
+Include an error message if applicable, preferably using the `--verbose` option when running the program, i.e.:
 ```
-dotter deploy --verbose  # Should now give a lot more output
+dotman deploy --verbose  # Should now give a lot more output
 ```
