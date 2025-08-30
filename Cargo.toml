@@ -1,6 +1,6 @@
 [package]
 name = "dotman"
-version = "0.13.3"
+version = "0.13.4"
 authors = ["FaceFTW <alex@faceftw.dev>"]
 description = "A dotfile manager and templater written in rust, forked from SuperCuber/dotter"
 edition = "2024"
