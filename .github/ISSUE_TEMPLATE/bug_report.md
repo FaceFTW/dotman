@@ -9,7 +9,7 @@ assignees: ''
 
 ## Environment
 - **OS**: Linux distribution / Windows version
-- **DotMan version**: Find out using `dotman -V`
+- **link-cfg version**: Find out using `link-cfg -V`
 - **Additional relevant information**
 
 ## Description
@@ -25,5 +25,5 @@ A clear and concise description of what you expected to happen.
 What actually happened.
 Include an error message if applicable, preferably using the `--verbose` option when running the program, i.e.:
 ```
-dotman deploy --verbose  # Should now give a lot more output
+link-cfg deploy --verbose  # Should now give a lot more output
 ```

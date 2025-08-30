@@ -409,30 +409,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "dotman"
-version = "0.13.4"
-dependencies = [
- "anyhow",
- "clap",
- "clap_complete",
- "crossterm",
- "diff",
- "dunce",
- "env_logger",
- "handlebars",
- "handlebars_misc_helpers",
- "hostname",
- "libc",
- "log",
- "maplit",
- "mockall",
- "serde",
- "shellexpand",
- "simplelog",
- "toml 0.9.5",
-]
-
-[[package]]
 name = "downcast"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -688,6 +664,30 @@ checksum = "391290121bad3d37fbddad76d8f5d1c1c314cfc646d143d7e07a3086ddff0ce3"
 dependencies = [
  "bitflags",
  "libc",
+]
+
+[[package]]
+name = "link-cfg"
+version = "0.13.4"
+dependencies = [
+ "anyhow",
+ "clap",
+ "clap_complete",
+ "crossterm",
+ "diff",
+ "dunce",
+ "env_logger",
+ "handlebars",
+ "handlebars_misc_helpers",
+ "hostname",
+ "libc",
+ "log",
+ "maplit",
+ "mockall",
+ "serde",
+ "shellexpand",
+ "simplelog",
+ "toml 0.9.5",
 ]
 
 [[package]]

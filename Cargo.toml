@@ -1,14 +1,14 @@
 [package]
-name = "dotman"
+name = "link-cfg"
 version = "0.13.4"
 authors = ["FaceFTW <alex@faceftw.dev>"]
 description = "A dotfile manager and templater written in rust, forked from SuperCuber/dotter"
 edition = "2024"
-repository = "https://github.com/FaceFTW/dotman"
+repository = "https://github.com/FaceFTW/link-cfg"
 readme = "README.md"
 keywords = ["dotter", "dotfiles", "manager", "cli"]
 categories = ["command-line-utilities"]
-license = "Apache 2.0 License"
+license = "Apache-2.0"
 rust-version = "1.85"
 
 [dependencies]

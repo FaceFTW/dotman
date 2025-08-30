@@ -104,7 +104,7 @@ Otherwise, run `dotter undeploy` as root, remove cache.toml and cache/ folders, 
                 generate(
                     shell,
                     &mut args::Options::command(),
-                    "dotman",
+                    "link-cfg",
                     &mut io::stdout(),
                 );
             }

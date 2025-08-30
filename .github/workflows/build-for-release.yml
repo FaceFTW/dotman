@@ -63,7 +63,7 @@ jobs:
       - name: Upload asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ github.event.release.tag_name }} target/${{ matrix.target }}/release/dotman${{ matrix.exe_suffix }}#dotman-${{ matrix.build_name}}${{ matrix.name_suffix }}
+        run: gh release upload ${{ github.event.release.tag_name }} target/${{ matrix.target }}/release/link-cfg${{ matrix.exe_suffix }}#link-cfg-${{ matrix.build_name}}${{ matrix.name_suffix }}
 
   build-completions:
     runs-on: ubuntu-latest

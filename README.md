@@ -1,6 +1,6 @@
-# DotMan
+# `link-cfg`
 
-`dotman` is an opinionated, diverging fork of [`SuperCuber/dotter`](https://github.com/SuperCuber/dotter), which now seems to be unmaintained. This fork has some key differences from `dotter` to make it much "lighter" and work the way _I_ want it to, but still retain compatibility with the original tool.
+`link-cfg` is an opinionated, diverging fork of [`SuperCuber/dotter`](https://github.com/SuperCuber/dotter), which now seems to be unmaintained. This fork has some key differences from `dotter` to make it much "lighter" and work the way _I_ want it to, but still retain compatibility with the original tool.
 
 ___This divergence is a work in progress, with breaking changes detailed as they are made.___
 
@@ -20,10 +20,10 @@ For each change, I provide a bit of my reasoning, so before you open an issue, r
   - Single verbosity level prints TRACE + DEBUG logs
   - TRACE logs are removed overall.
   - Using [`env-logger`](https://github.com/rust-cli/env_logger) as a personal preference
-> The above changes are more of a personal preference. I'd like to see what DotMan is doing when I do deploy/rollback. `--quiet` is still available as an option for those who want it.
+> The above changes are more of a personal preference. I'd like to see what `link-cfg` is doing when I do deploy/rollback. `--quiet` is still available as an option for those who want it.
 >
 > The general methodology I plan to put when it comes to reorganizing INFO and lower messages are as follows:
-> - INFO - information about the general actions DotMan is taking
+> - INFO - information about the general actions `link-cfg` is taking
 > - DEBUG - extra information like detected state that is more useful in certain situations
 > - TRACE - something to insert when working in the code and modifying something
 
@@ -36,7 +36,7 @@ No official packages are yet available, but building from source is possible thr
 cargo build --release
 ```
 
-The compiled binary (`dotman`) will be in the `target/release` folder.
+The compiled binary (`link-cfg`) will be in the `target/release` folder.
 
 # Wiki
 TODO
@@ -46,16 +46,16 @@ https://github.com/SuperCuber/dotter/wiki
 
 # Usage
 
-Check out `dotman -h` for the command-line flags that DotMan supports:
+Check out `link-cfg -h` for the command-line flags that `link-cfg` supports:
 
 ```
 
 ```
 
 # Contributing
-Contributions to DotMan are welcome, whether in the form of a pull request or an issue (for bug repots, feature requests, or other helpful comments)
+Contributions to link-cfg are welcome, whether in the form of a pull request or an issue (for bug repots, feature requests, or other helpful comments)
 
 # Legal Stuff
 
-`dotman` is licensed under the MIT License.
+`link-cfg` is licensed under the MIT License.
 The original source code of `SuperCuber/dotter` was licensed under the Unlicense.
