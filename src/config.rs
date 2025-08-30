@@ -150,7 +150,7 @@ pub fn load_configuration(
     let global: GlobalConfig = filesystem::load_file(global_config)
         .and_then(|c| c.ok_or_else(|| anyhow::anyhow!("file not found")))
         .with_context(|| format!("load global config {global_config:?}"))?;
-    trace!("Global config: {:#?}", global);
+    debug!("Global config: {:#?}", global);
 
     // If local.toml can't be found, look for a file named <hostname>.toml instead
     let mut local_config_buf = local_config.to_path_buf();
@@ -169,11 +169,11 @@ pub fn load_configuration(
     let local: LocalConfig = filesystem::load_file(local_config_buf.as_path())
         .and_then(|c| c.ok_or_else(|| anyhow::anyhow!("file not found")))
         .with_context(|| format!("load local config {local_config:?}"))?;
-    trace!("Local config: {:#?}", local);
+    debug!("Local config: {:#?}", local);
 
     let mut merged_config =
         merge_configuration_files(global, local, patch).context("merge configuration files")?;
-    trace!("Merged config: {:#?}", merged_config);
+    debug!("Merged config: {:#?}", merged_config);
 
     debug!("Expanding files which are directories...");
     merged_config.files =
@@ -193,9 +193,9 @@ pub fn load_configuration(
         })
         .collect::<Result<_, _>>()?;
 
-    trace!("Final files: {:#?}", merged_config.files);
-    trace!("Final variables: {:#?}", merged_config.variables);
-    trace!("Final helpers: {:?}", merged_config.helpers);
+    debug!("Final files: {:#?}", merged_config.files);
+    debug!("Final variables: {:#?}", merged_config.variables);
+    debug!("Final helpers: {:?}", merged_config.helpers);
 
     Ok(merged_config)
 }
@@ -218,7 +218,7 @@ pub fn save_dummy_config(
         variables: Variables::new(),
         depends: vec![],
     };
-    trace!("Default package: {:#?}", package);
+    debug!("Default package: {:#?}", package);
 
     let mut packages = BTreeMap::new();
     packages.insert("default".into(), package);
@@ -243,7 +243,7 @@ pub fn save_dummy_config(
         files: Files::default(),
         variables: Variables::default(),
     };
-    trace!("Local config: {:#?}", local_config);
+    debug!("Local config: {:#?}", local_config);
     filesystem::save_file(local_config_path, local_config).context("save local config")?;
 
     Ok(())
@@ -286,7 +286,7 @@ fn merge_configuration_files(
                 .context("load file")?;
 
             debug!("Included config {:?}", included_path);
-            trace!("{:#?}", included);
+            debug!("{:#?}", included);
 
             // If package isn't filtered it's ignored, if package isn't included it's ignored
             for (package_name, package_global) in &mut global.packages {
@@ -365,7 +365,7 @@ fn merge_configuration_files(
                 {
                     match (first_value, variable_value) {
                         (toml::Value::Table(first_value), toml::Value::Table(variable_value)) => {
-                            trace!("Merging {:?} tables", variable_name);
+                            debug!("Merging {:?} tables", variable_name);
                             recursive_extend_map(first_value, variable_value);
                         }
                         _ => {
@@ -550,7 +550,7 @@ fn expand_directory(source: &Path, target: &FileTarget, config: &Configuration) 
         _ => config.recurse,
     };
 
-    trace!("expanding '{source:?}', recurse: {recurse}");
+    debug!("expanding '{source:?}', recurse: {recurse}");
 
     if !recurse || !metadata.is_dir() {
         let mut map = Files::new();

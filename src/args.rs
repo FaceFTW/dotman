@@ -56,10 +56,9 @@ pub struct Options {
     #[clap(short = 'd', long = "dry-run", global = true)]
     pub dry_run: bool,
 
-    /// Verbosity level - specify up to 3 times to get more detailed output.
-    /// Specifying at least once prints the differences between what was before and after Dotter's run
-    #[clap(short = 'v', long = "verbose", action = clap::ArgAction::Count, global = true)]
-    pub verbosity: u8,
+    /// Verbose - enable debug/trace level log output
+    #[clap(short = 'v', long = "verbose", global = true)]
+    pub verbosity: bool,
 
     /// Quiet - only print errors
     #[clap(short, long, value_parser, global = true)]
@@ -115,10 +114,6 @@ pub enum Action {
 
 pub fn get_options() -> Options {
     let mut opt = Options::parse();
-    if opt.dry_run {
-        opt.verbosity = std::cmp::max(opt.verbosity, 1);
-    }
-    opt.verbosity = std::cmp::min(3, opt.verbosity);
     if opt.patch {
         opt.noconfirm = true;
     }

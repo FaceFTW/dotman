@@ -103,18 +103,18 @@ impl RealFilesystem {
 impl Filesystem for RealFilesystem {
     fn compare_symlink(&mut self, source: &Path, link: &Path) -> Result<SymlinkComparison> {
         let source_state = get_file_state(source).context("get source state")?;
-        trace!("Source state: {:#?}", source_state);
+        debug!("Source state: {:#?}", source_state);
         let link_state = get_file_state(link).context("get link state")?;
-        trace!("Link state: {:#?}", link_state);
+        debug!("Link state: {:#?}", link_state);
 
         compare_symlink(source, source_state, link_state)
     }
 
     fn compare_template(&mut self, target: &Path, cache: &Path) -> Result<TemplateComparison> {
         let target_state = get_file_state(target).context("get state of target")?;
-        trace!("Target state: {:#?}", target_state);
+        debug!("Target state: {:#?}", target_state);
         let cache_state = get_file_state(cache).context("get state of cache")?;
-        trace!("Cache state: {:#?}", cache_state);
+        debug!("Cache state: {:#?}", cache_state);
 
         Ok(compare_template(target_state, cache_state))
     }

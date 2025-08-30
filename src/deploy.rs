@@ -25,7 +25,7 @@ pub fn deploy(opt: &Options) -> Result<bool> {
             .context("read patch from stdin")?;
         patch = Some(toml::from_str(&patch_str).context("parse patch into package")?);
     }
-    trace!("Manual patch: {:#?}", patch);
+    debug!("Manual patch: {:#?}", patch);
 
     let mut config = config::load_configuration(&opt.local_config, &opt.global_config, patch)
         .context("get a configuration")?;
