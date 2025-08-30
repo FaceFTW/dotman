@@ -33,13 +33,20 @@ jobs:
             name_suffix: ".exe"
             target: x86_64-pc-windows-msvc
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
       - name: Update Rust
-        run: rustup update
-      - name: Add target
-        run: rustup target add ${{ matrix.target }}
-      - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2
+        run: |
+          rustup update
+          rustup target add ${{ matrix.target }}
+
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: "~/.cargo"
+          key: cargo-main
+
       - name: Build
         shell: bash
         run: |
@@ -49,23 +56,27 @@ jobs:
             _cargo="cross"
           fi
           $_cargo build --release --locked --verbose --target ${{ matrix.target }}
+
       - name: Upload asset
-        uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          asset_path: target/${{ matrix.target }}/release/dotter${{ matrix.exe_suffix }}
-          asset_name: dotter-${{ matrix.build_name}}${{ matrix.name_suffix }}
-          asset_content_type: application/octet-stream
-          upload_url: ${{ github.event.release.upload_url }}
+        run: gh release upload ${{ github.event.release.tag_name }} target/${{ matrix.target }}/release/dotman${{ matrix.exe_suffix }}#dotman-${{ matrix.build_name}}${{ matrix.name_suffix }}
+
   build-completions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Update rust
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Update Rust
         run: rustup update
-      - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2
+
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: "~/.cargo"
+          key: cargo-main
+
       - name: Generate Completions
         run: |
           cargo build
@@ -78,15 +89,20 @@ jobs:
           done
 
           zip -r completions.zip completions
-      - name: Upload Assets
-        uses: softprops/action-gh-release@v1
-        with:
-          files: completions.zip
+
+      - name: Upload Asset
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ github.event.release.tag_name }} completions.zip#shell-completions-zip
+
   cargo-publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: cargo login ${CRATES_IO_TOKEN}
-        env:
-          CRATES_IO_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-      - run: cargo publish
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Login to crates.io
+        run: cargo login ${{ secrets.CRATES_IO_TOKEN }}
+
+      - name: Publish to crates.io
+        run: cargo publish
