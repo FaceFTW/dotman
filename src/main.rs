@@ -42,11 +42,11 @@ fn main() {
             //Uses similar system to the colog crate, but I removed all the trait stuff since it's internal impl
             fn prefix(level: log::Level) -> String {
                 match level {
-                    log::Level::Error => format!("[{}]", "E".red().to_string()),
-                    log::Level::Warn => format!("[{}]", "W".yellow().to_string()),
-                    log::Level::Info => format!("[{}]", "*".green().to_string()),
-                    log::Level::Debug => format!("[{}]", "D"),
-                    log::Level::Trace => format!("[{}]", "T".magenta().to_string()),
+                    log::Level::Error => format!("[{}]", "E".red()),
+                    log::Level::Warn => format!("[{}]", "W".yellow()),
+                    log::Level::Info => format!("[{}]", "*".green()),
+                    log::Level::Debug => format!("[{}]", "D".cyan()),
+                    log::Level::Trace => format!("[{}]", "T".magenta()),
                 }
                 .bold()
                 .to_string()
@@ -98,7 +98,7 @@ Otherwise, run `dotter undeploy` as root, remove cache.toml and cache/ folders, 
                 run_cmd!(
                     generate_to(shell, &mut args::Options::command(), "dotter", to)
                         .context("write completion to a file")
-                        .and_then(|_| Ok(true)) //We don't use the pathbuf here anyway?
+                        .map(|_| true) //We don't use the pathbuf here anyway?
                 )
             } else {
                 generate(
